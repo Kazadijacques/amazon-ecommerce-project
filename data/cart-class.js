@@ -1,9 +1,14 @@
-function Cart(localStorageKey) {
-  const cart = {
-  cartItems: undefined,
+class Cart {
+  cartItems;
+  localStorageKey;
 
-   loadFromStorage() {
-    this.cartItems = JSON.parse(localStorage.getItem(localStorageKey));
+  constructor(localStorageKey) {
+    this.localStorageKey = localStorageKey;
+    this.loadFromStorage();
+  }
+
+  loadFromStorage() {
+    this.cartItems = JSON.parse(localStorage.getItem(this.localStorageKey));
 
     if (!this.cartItems) {
       this.cartItems = [{
@@ -16,13 +21,11 @@ function Cart(localStorageKey) {
         deliveryOptionId: '2'
       }];
     }
-
-  },
+  }
 
   saveToStorage() {
-    localStorage.setItem(localStorageKey, JSON.stringify(this.cartItems));
-  },
-
+    localStorage.setItem(this.localStorageKey, JSON.stringify(this.cartItems));
+  }
 
   addToCart(productId) {
     let matchingItem;
@@ -44,9 +47,9 @@ function Cart(localStorageKey) {
     }
 
     this.saveToStorage(); 
-  },
+  }
 
-  removeFromCart(productId) {
+   removeFromCart(productId) {
     const newCart = [];
 
     this.cartItems.forEach((cartItem) => {
@@ -58,9 +61,9 @@ function Cart(localStorageKey) {
     this.cartItems = newCart;
 
     this.saveToStorage();
-  },
+  }
 
-  updateDeliveryOption(productId, deliveryOptionId) {
+    updateDeliveryOption(productId, deliveryOptionId) {
     let matchingItem;
 
     this.cartItems.forEach((cartItem) => {
@@ -73,21 +76,13 @@ function Cart(localStorageKey) {
 
     this.saveToStorage();
   }
-};
-
-  return cart;
 }
 
-const cart = Cart('cart-oop');
-const businessCart = Cart('cart-business');
+
+const cart = new Cart('cart-oop');
+const businessCart = new Cart('cart-business');
 
 
-
-cart.loadFromStorage();
-
-
-
-businessCart.loadFromStorage();
 
 console.log(cart);
 
