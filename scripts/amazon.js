@@ -86,3 +86,14 @@ function renderProductsGrid() {
       });
     });
 }
+/*
+  document.querySelector(`.js-quantity-selector-${productId}`);
+  productId.addEventListener('change', () => {
+    const quantity = quantitySelector.value ;
+     quantity = Number(quantitySelector.value);
+});
+
+console.log(quantity);
+*/
+
+
